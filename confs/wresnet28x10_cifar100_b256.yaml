@@ -6,13 +6,13 @@ randaug:
   N: 2
   M: 14
 cutout: 16
-batch: 512
+batch: 256
 epoch: 200
 lr: 0.1
 lr_schedule:
   type: 'cosine'
   warmup:
-    multiplier: 4
+    multiplier: 2
     epoch: 5
 optimizer:
   type: sgd

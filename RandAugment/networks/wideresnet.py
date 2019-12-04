@@ -4,6 +4,9 @@ import torch.nn.functional as F
 import numpy as np
 
 
+_bn_momentum = 0.1
+
+
 def conv3x3(in_planes, out_planes, stride=1):
     return nn.Conv2d(in_planes, out_planes, kernel_size=3, stride=stride, padding=1, bias=True)
 
@@ -21,10 +24,10 @@ def conv_init(m):
 class WideBasic(nn.Module):
     def __init__(self, in_planes, planes, dropout_rate, stride=1):
         super(WideBasic, self).__init__()
-        self.bn1 = nn.BatchNorm2d(in_planes, momentum=0.9)
+        self.bn1 = nn.BatchNorm2d(in_planes, momentum=_bn_momentum)
         self.conv1 = nn.Conv2d(in_planes, planes, kernel_size=3, padding=1, bias=True)
         self.dropout = nn.Dropout(p=dropout_rate)
-        self.bn2 = nn.BatchNorm2d(planes, momentum=0.9)
+        self.bn2 = nn.BatchNorm2d(planes, momentum=_bn_momentum)
         self.conv2 = nn.Conv2d(planes, planes, kernel_size=3, stride=stride, padding=1, bias=True)
 
         self.shortcut = nn.Sequential()
@@ -56,7 +59,7 @@ class WideResNet(nn.Module):
         self.layer1 = self._wide_layer(WideBasic, nStages[1], n, dropout_rate, stride=1)
         self.layer2 = self._wide_layer(WideBasic, nStages[2], n, dropout_rate, stride=2)
         self.layer3 = self._wide_layer(WideBasic, nStages[3], n, dropout_rate, stride=2)
-        self.bn1 = nn.BatchNorm2d(nStages[3], momentum=0.9)
+        self.bn1 = nn.BatchNorm2d(nStages[3], momentum=_bn_momentum)
         self.linear = nn.Linear(nStages[3], num_classes)
 
         # self.apply(conv_init)
