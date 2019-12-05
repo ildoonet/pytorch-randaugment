@@ -5,6 +5,7 @@ import torchvision
 from PIL import Image
 
 from torch.utils.data import SubsetRandomSampler, Sampler
+from torch.utils.data.dataset import ConcatDataset
 from torchvision.transforms import transforms
 from sklearn.model_selection import StratifiedShuffleSplit
 from theconf import Config as C
@@ -80,6 +81,11 @@ def get_dataloaders(dataset, batch, dataroot, split=0.15, split_idx=0):
     elif dataset == 'cifar100':
         total_trainset = torchvision.datasets.CIFAR100(root=dataroot, train=True, download=True, transform=transform_train)
         testset = torchvision.datasets.CIFAR100(root=dataroot, train=False, download=True, transform=transform_test)
+    elif dataset == 'svhn':
+        trainset = torchvision.datasets.SVHN(root=dataroot, split='train', download=True, transform=transform_train)
+        extraset = torchvision.datasets.SVHN(root=dataroot, split='extra', download=True, transform=transform_train)
+        total_trainset = ConcatDataset([trainset, extraset])
+        testset = torchvision.datasets.SVHN(root=dataroot, split='test', download=True, transform=transform_test)
     elif dataset == 'imagenet':
         total_trainset = ImageNet(root=os.path.join(dataroot, 'imagenet-pytorch'), transform=transform_train)
         testset = ImageNet(root=os.path.join(dataroot, 'imagenet-pytorch'), split='val', transform=transform_test)

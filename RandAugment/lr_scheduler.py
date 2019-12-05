@@ -11,6 +11,8 @@ def adjust_learning_rate_resnet(optimizer):
 
     if C.get()['epoch'] == 90:
         return torch.optim.lr_scheduler.MultiStepLR(optimizer, [30, 60, 80])
+    elif C.get()['epoch'] == 180:
+        return torch.optim.lr_scheduler.MultiStepLR(optimizer, [60, 120, 160])
     elif C.get()['epoch'] == 270:   # autoaugment
         return torch.optim.lr_scheduler.MultiStepLR(optimizer, [90, 180, 240])
     else:

@@ -1,19 +1,19 @@
 model:
-  type: shakeshake26_2x96d
-dataset: cifar10
+  type: wresnet28_10
+dataset: svhn
 aug: randaugment
 randaug:
   N: 3
-  M: 9
+  M: 7    # from appendix
 
 cutout: 16
-batch: 512
-epoch: 1800
-lr: 0.01
+batch: 256
+epoch: 160
+lr: 0.005
 lr_schedule:
   type: 'cosine'
   warmup:
-    multiplier: 4
+    multiplier: 2
     epoch: 5
 optimizer:
   type: sgd
