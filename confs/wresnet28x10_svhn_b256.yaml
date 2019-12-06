@@ -14,7 +14,7 @@ lr_schedule:
   type: 'cosine'
   warmup:
     multiplier: 2
-    epoch: 5
+    epoch: 3
 optimizer:
   type: sgd
   nesterov: True

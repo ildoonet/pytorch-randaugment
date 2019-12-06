@@ -4,7 +4,7 @@ Unofficial PyTorch Reimplementation of RandAugment. Most of codes are from [Fast
 
 ## Introduction
 
-TODO
+Models can be trained with RandAugment for the dataset of interest with no need for a separate proxy task. By only tuning two hyperparameters(N, M), you can achieve competitive performances as AutoAugments.
 
 ## Install
 
@@ -57,7 +57,7 @@ $ python RandAugment/train.py -c confs/wresnet28x10_cifar10_b256.yaml --save cif
 
 | Model             | Paper's Result | Ours         |
 |-------------------|---------------:|-------------:|
-| Wide-ResNet 28x10 | 98.9           | TODO         |
+| Wide-ResNet 28x10 | 98.9           | 98.8         |
 
 ### ImageNet Classification
 
