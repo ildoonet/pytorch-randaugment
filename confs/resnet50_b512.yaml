@@ -7,13 +7,13 @@ randaug:
   M: 9
 
 cutout: 0
-batch: 1024
+batch: 512
 epoch: 180  # 270
 lr: 0.1
 lr_schedule:
   type: 'resnet'
   warmup:
-    multiplier: 4
+    multiplier: 2
     epoch: 3
 optimizer:
   type: sgd

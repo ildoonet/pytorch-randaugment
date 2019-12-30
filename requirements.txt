@@ -11,3 +11,4 @@ ray
 matplotlib
 psutil
 requests
+torchlars

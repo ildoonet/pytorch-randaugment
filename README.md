@@ -61,6 +61,10 @@ $ python RandAugment/train.py -c confs/wresnet28x10_cifar10_b256.yaml --save cif
 
 ### ImageNet Classification
 
+I have experienced some difficulties while reproducing paper's result.
+
+**Issue : https://github.com/ildoonet/pytorch-randaugment/issues/9**
+
 | Model             | Paper's Result | Ours         |
 |-------------------|---------------:|-------------:|
 | ResNet-50         | 77.6 / 92.8    | TODO 

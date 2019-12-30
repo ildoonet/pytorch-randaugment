@@ -20,6 +20,7 @@ from RandAugment.networks import get_model, num_class
 from warmup_scheduler import GradualWarmupScheduler
 
 from RandAugment.common import add_filehandler
+from RandAugment.smooth_ce import SmoothCrossEntropyLoss
 
 logger = get_logger('RandAugment')
 logger.setLevel(logging.INFO)
@@ -94,7 +95,11 @@ def train_and_eval(tag, dataroot, test_ratio=0.0, cv_fold=0, reporter=None, metr
     # create a model & an optimizer
     model = get_model(C.get()['model'], num_class(C.get()['dataset']))
 
-    criterion = nn.CrossEntropyLoss()
+    lb_smooth = C.get()['optimizer'].get('label_smoothing', 0.0)
+    if lb_smooth > 0.0:
+        criterion = SmoothCrossEntropyLoss(lb_smooth)
+    else:
+        criterion = nn.CrossEntropyLoss()
     if C.get()['optimizer']['type'] == 'sgd':
         optimizer = optim.SGD(
             model.parameters(),
@@ -105,6 +110,11 @@ def train_and_eval(tag, dataroot, test_ratio=0.0, cv_fold=0, reporter=None, metr
         )
     else:
         raise ValueError('invalid optimizer type=%s' % C.get()['optimizer']['type'])
+
+    if C.get()['optimizer'].get('lars', False):
+        from torchlars import LARS
+        optimizer = LARS(optimizer)
+        logger.info('*** LARS Enabled.')
 
     lr_scheduler_type = C.get()['lr_schedule'].get('type', 'cosine')
     if lr_scheduler_type == 'cosine':

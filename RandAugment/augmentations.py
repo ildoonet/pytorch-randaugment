@@ -160,13 +160,13 @@ def augment_list():  # 16 oeprations and their ranges
         (Identity, 0., 1.0),
         (ShearX, 0., 0.3),  # 0
         (ShearY, 0., 0.3),  # 1
-        (TranslateX, 0., 0.45),  # 2
-        (TranslateY, 0., 0.45),  # 3
+        (TranslateX, 0., 0.33),  # 2
+        (TranslateY, 0., 0.33),  # 3
         (Rotate, 0, 30),  # 4
         (AutoContrast, 0, 1),  # 5
         (Invert, 0, 1),  # 6
         (Equalize, 0, 1),  # 7
-        (Solarize, 0, 256),  # 8
+        (Solarize, 0, 110),  # 8
         (Posterize, 4, 8),  # 9
         # (Contrast, 0.1, 1.9),  # 10
         (Color, 0.1, 1.9),  # 11

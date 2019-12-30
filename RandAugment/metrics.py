@@ -22,19 +22,6 @@ def accuracy(output, target, topk=(1,)):
     return res
 
 
-def cross_entropy_smooth(input, target, size_average=True, label_smoothing=0.1):
-    y = torch.eye(10).cuda()
-    lb_oh = y[target]
-
-    target = lb_oh * (1 - label_smoothing) + 0.5 * label_smoothing
-
-    logsoftmax = nn.LogSoftmax()
-    if size_average:
-        return torch.mean(torch.sum(-target * logsoftmax(input), dim=1))
-    else:
-        return torch.sum(torch.sum(-target * logsoftmax(input), dim=1))
-
-
 class Accumulator:
     def __init__(self):
         self.metrics = defaultdict(lambda: 0.)
