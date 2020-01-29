@@ -258,7 +258,7 @@ if __name__ == '__main__':
             logger.warning('Provide --save argument to save the checkpoint. Without it, training result will not be saved!')
 
     if args.save:
-        add_filehandler(logger, args.save.replace('.pth', '.log'))
+        add_filehandler(logger, args.save.replace('.pth', '') + '.log')
 
     logger.info(json.dumps(C.get().conf, indent=4))
 
