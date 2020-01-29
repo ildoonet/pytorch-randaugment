@@ -90,7 +90,8 @@ def SolarizeAdd(img, addition=0, threshold=128):
 
 
 def Posterize(img, v):  # [4, 8]
-    v = int(v) + 1
+    v = int(v)
+    v = max(1, v)
     return PIL.ImageOps.posterize(img, v)
 
 
