@@ -96,23 +96,31 @@ def Posterize(img, v):  # [4, 8]
 
 
 def Contrast(img, v):  # [0.1,1.9]
-    assert 0.1 <= v <= 1.9
-    return PIL.ImageEnhance.Contrast(img).enhance(v)
+    assert 0 <= v <= 0.9
+    if random.random() > 0.5:
+        v = -v
+    return PIL.ImageEnhance.Contrast(img).enhance(1+v)
 
 
 def Color(img, v):  # [0.1,1.9]
-    assert 0.1 <= v <= 1.9
-    return PIL.ImageEnhance.Color(img).enhance(v)
+    assert 0 <= v <= 0.9
+    if random.random() > 0.5:
+        v = -v
+    return PIL.ImageEnhance.Color(img).enhance(1+v)
 
 
 def Brightness(img, v):  # [0.1,1.9]
-    assert 0.1 <= v <= 1.9
-    return PIL.ImageEnhance.Brightness(img).enhance(v)
+    assert 0 <= v <= 0.9
+    if random.random() > 0.5:
+        v = -v
+    return PIL.ImageEnhance.Brightness(img).enhance(1+v)
 
 
 def Sharpness(img, v):  # [0.1,1.9]
-    assert 0.1 <= v <= 1.9
-    return PIL.ImageEnhance.Sharpness(img).enhance(v)
+    assert 0 <= v <= 0.9
+    if random.random() > 0.5:
+        v = -v
+    return PIL.ImageEnhance.Sharpness(img).enhance(1+v)
 
 
 def Cutout(img, v):  # [0, 60] => percentage: [0, 0.2]
@@ -189,10 +197,10 @@ def augment_list():  # 16 oeprations and their ranges
         (Posterize, 0, 4),
         (Solarize, 0, 256),
         (SolarizeAdd, 0, 110),
-        (Color, 0.1, 1.9),
-        (Contrast, 0.1, 1.9),
-        (Brightness, 0.1, 1.9),
-        (Sharpness, 0.1, 1.9),
+        (Color, 0, 0.9),
+        (Contrast, 0, 0.9),
+        (Brightness, 0, 0.9),
+        (Sharpness, 0, 0.9),
         (ShearX, 0., 0.3),
         (ShearY, 0., 0.3),
         (CutoutAbs, 0, 40),
