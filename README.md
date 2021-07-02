@@ -9,7 +9,7 @@ Models can be trained with RandAugment for the dataset of interest with no need 
 ## Install
 
 ```bash
-$ pip install git+https://github.com/ildoonet/pytorch-randaugment
+$ pip install git+https://github.com/mohammadjavadd/pytorch-randaugment
 ```
 
 ## Usage
