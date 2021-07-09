@@ -259,6 +259,7 @@ class RandAugment:
         ops = random.choices(self.augment_list, k=self.n)
         for op, minval, maxval in ops:
             val = (float(self.m) / 30) * float(maxval - minval) + minval
-            img = op(img, val)
+            prob = np.random.uniform(low=0.2, high=0.8) # Range (0.2, 0.8) from RandAug imp (https://github.com/tensorflow/tpu/blob/5144289ba9c9e5b1e55cc118b69fe62dd868657c/models/official/efficientnet/autoaugment.py#L701)
+            if random.random() < prob: img = op(img, val)
 
         return img
