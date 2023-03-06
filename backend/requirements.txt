@@ -1,4 +1,0 @@
-flask
-gunicorn
-google-search-results
-flask-cors
