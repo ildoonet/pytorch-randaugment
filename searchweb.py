@@ -99,6 +99,6 @@ if __name__ == '__main__':
     # print(google_serp('프링글스'))
     d = get_htmls(['https://www.mangoplate.com/search/%EC%84%B8%EA%B3%A1%EB%8F%99'])
     print(type(d))
-    with open('test.html', 'w') as w:
-        w.write(d[0])
+    # with open('test.html', 'w') as w:
+    #     w.write(d[0])
     print(get_content(d[0]))
