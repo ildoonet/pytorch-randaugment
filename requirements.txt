@@ -6,3 +6,6 @@ google-search-results
 justext
 request_boost
 trafilatura
+
+# appweb
+flask
